@@ -10,7 +10,6 @@ require("./db");
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const cors = require("cors");
 const isAuth = require('./middleware/isAuth')
 
 
@@ -26,9 +25,7 @@ const storage = multer.diskStorage({
         cb(null, req.body.name);
     },
 });
-app.use(cors({
-    origin: "http://localhost:5173"
-}));
+
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
     res.status(200).json("File has been uploaded =)")
