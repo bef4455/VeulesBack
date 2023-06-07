@@ -1,10 +1,11 @@
 {
-  "name": "veulesBack-server",
+  "name": "veulesback-server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "vite build"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -22,6 +23,12 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.2.14",
     "nodemon": "^2.0.22"
-  }
+  },
+  "main": "app.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
