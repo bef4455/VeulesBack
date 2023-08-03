@@ -4,6 +4,8 @@ const User = require("../models/User.model");
 const Post = require("../models/post")
 const isAuth = require("../middleware/isAuth")
 
+
+
 //CREATE POST
 router.post("/", isAuth, async (req, res, next) => {
     const newPost = new Post(req.body);

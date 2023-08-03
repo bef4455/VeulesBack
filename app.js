@@ -8,23 +8,15 @@ require("./db");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
 const isAuth = require('./middleware/isAuth')
 
 
 const app = express();
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "/images")))
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "images");
-    },
-    filename: (req, file, cb) => {
-        cb(null, req.body.name);
-    },
-});
+// ℹ️ Add this line to include the Cloudinary middleware
+const fileUpload = require('./config/cloudinary');
+
 
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
@@ -47,10 +39,6 @@ app.use("/api/posts", postRoute);
 const categoryRoute = require("./routes/categories.routes")
 app.use("/api/categories", categoryRoute);
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
-    res.status(200).json("File has been uploaded =)")
-});
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
