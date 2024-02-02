@@ -77,7 +77,7 @@ router.post("/mot-de-passe-oublie", async (req, res) => {
 
         const resetToken = jwt.sign({ userId: user._id }, process.env.RESET_TOKEN_SECRET, { expiresIn: '1h' });
 
-        const resetUrl = `https://samsuphi.netlify.app/reset-password?token=${resetToken}`;
+        const resetUrl = `https://samsuphi.netlify.app/reset-password/${resetToken}`;
 
         const msg = {
             to: email,
